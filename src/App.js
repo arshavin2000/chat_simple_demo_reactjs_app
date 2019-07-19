@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './Message';
+import Message from './Message';
 
-function App() {
+class App extends React.Component {
+  state= {
+    message : "",
+    messages : []
+  }
+
+  getMessage = (e) => {
+    this.setState({
+      message : e.target.value
+    })
+  }
+
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      console.log('enter press here! ' + this.state.message)
+      this.setState({
+        messages : this.state.messages.concat(this.state.message)
+      })
+      this.setState({
+        message : ""
+      })
+    }
+  }
+  render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+            <h1>Chat Demo App</h1>
+            <input  value={this.state.message} placeholder="Put your message here ..." onKeyPress={this.handleKeyPress} onChange={this.getMessage} ></input>
+            <Message message={this.state.message} messages={this.state.messages}/>
+
+
     </div>
+
+   
   );
+  }
+  
 }
 
 export default App;
