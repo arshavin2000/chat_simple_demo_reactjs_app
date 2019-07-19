@@ -1,7 +1,7 @@
 import React from 'react'
 import './Message.css'
 
- function Message( {message="...", messages=["..."]}) {
+ function Message( {message="...", messages=["..."], username1="" , username2=""}) {
 
    
 
@@ -12,9 +12,10 @@ import './Message.css'
     return(
     <ul className="Messages-list">
         {messages.map((m,i) => {
-    const messageFromMe = i%2 === 0;
+    const messageFromMe = i%2 !== 0;
     const className = messageFromMe ? "Messages-message currentMember" : "Messages-message";
-    const backgorundPic = messageFromMe ? 'red' : 'cornflowerblue'
+    const backgorundPic = messageFromMe ? 'red' : 'cornflowerblue';
+    const username = messageFromMe ? username2 : username1;
 
     return (
      <li className={className}>
@@ -24,13 +25,27 @@ import './Message.css'
     />
     <div className="Message-content">
       <div className="username">
-          Achref
+          {username}
       </div>
-      <div className="text">{message}</div>
+      <div className="text">{m}</div>
     </div>
   </li>
       );
         })}
+         
+    {message !== "" ? 
+    <div className="Message-content">
+      <div className="username">
+          Someone is writing
+      </div>
+      <div className="text">{message}</div>
+    </div> : 
+    <div className="Message-content">
+      <div className="username">
+          Someone is writing
+      </div>
+      <div className="text">...</div>
+    </div> }
       </ul>);
     
     

@@ -6,12 +6,27 @@ import Message from './Message';
 class App extends React.Component {
   state= {
     message : "",
-    messages : []
+    messages : [],
+    username1 : "",
+    username2 : "",
   }
 
   getMessage = (e) => {
     this.setState({
       message : e.target.value
+    })
+  }
+
+  getUsername1 = (e) => {
+    this.setState({
+      username1 : e.target.value
+    })
+  }
+
+  getUsername2 = (e) => {
+
+    this.setState({
+      username2 : e.target.value
     })
   }
 
@@ -29,10 +44,13 @@ class App extends React.Component {
   render(){
   return (
     <div className="App">
-            <h1>Chat Demo App</h1>
-            <input  value={this.state.message} placeholder="Put your message here ..." onKeyPress={this.handleKeyPress} onChange={this.getMessage} ></input>
-            <Message message={this.state.message} messages={this.state.messages}/>
-
+            <h1>Chat Demo App with ReactJS</h1>
+            <input className="username" value={this.state.username1} placeholder="Username 1" onChange={this.getUsername1} ></input>
+            <input className="username"  value={this.state.username2} placeholder="Username 2" onChange={this.getUsername2}  ></input><br/>
+            <div className="content">
+            <Message message={this.state.message} messages={this.state.messages} username1={this.state.username1} username2={this.state.username2}/>
+            </div>
+            <input className="message" value={this.state.message} placeholder="Put your message here ..." onKeyPress={this.handleKeyPress} onChange={this.getMessage} ></input>
 
     </div>
 
